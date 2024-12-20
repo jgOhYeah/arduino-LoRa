@@ -124,8 +124,7 @@ int LoRaClass::begin(long frequency)
   _spi->begin();
 
   // check version
-  uint8_t version = readRegister(REG_VERSION);
-  if (version != 0x12) {
+  if(!isConnected()) {
     return 0;
   }
 
@@ -686,6 +685,16 @@ void LoRaClass::setGain(uint8_t gain)
     // set gain
     writeRegister(REG_LNA, readRegister(REG_LNA) | (gain << 5));
   }
+}
+
+bool LoRaClass::isConnected()
+{
+  // Check version and assume that the module is connected and working correctly if the correct response is given.
+  uint8_t version = readRegister(REG_VERSION);
+  if (version != 0x12) {
+    return false;
+  }
+  return true;
 }
 
 byte LoRaClass::random()

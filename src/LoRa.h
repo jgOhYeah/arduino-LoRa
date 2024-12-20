@@ -86,6 +86,8 @@ public:
   
   void setGain(uint8_t gain); // Set LNA gain
 
+  bool isConnected();
+  
   // deprecated
   void crc() { enableCrc(); }
   void noCrc() { disableCrc(); }
@@ -97,7 +99,7 @@ public:
   void setSPIFrequency(uint32_t frequency);
 
   void dumpRegisters(Stream& out);
-
+  
 private:
   void explicitHeaderMode();
   void implicitHeaderMode();
