@@ -690,11 +690,7 @@ void LoRaClass::setGain(uint8_t gain)
 bool LoRaClass::isConnected()
 {
   // Check version and assume that the module is connected and working correctly if the correct response is given.
-  uint8_t version = readRegister(REG_VERSION);
-  if (version != 0x12) {
-    return false;
-  }
-  return true;
+  return readRegister(REG_VERSION) == 0x12;
 }
 
 byte LoRaClass::random()
